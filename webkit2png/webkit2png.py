@@ -295,6 +295,8 @@ class _WebkitRendererHelper(QObject):
                 raise RuntimeError("Request timed out on %s" % res)
             while QApplication.hasPendingEvents() and self.__loading:
                 QCoreApplication.processEvents()
+		# sleep to decrease cpu usage while waiting for response
+		time.sleep(0.5)
 
         if self.logger: self.logger.debug("Processing result")
 
